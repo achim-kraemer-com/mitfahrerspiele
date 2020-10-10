@@ -1,0 +1,43 @@
+version: '2'
+services:
+    db:
+        image: mysql:5.7.22
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: symfony
+            MYSQL_USER: symfony
+            MYSQL_PASSWORD: symfony
+        volumes:
+          - ./data/db:/var/lib/mysql
+    php:
+        build: php-fpm/7.4
+        container_name: mitfahrerspiele
+        ports:
+            - "9000:9000"
+            - "9999:9999"
+        volumes:
+            - ../application:/var/www/symfony:cached
+            - ./logs/symfony:/var/www/symfony/var/logs:cached
+        depends_on:
+          - db
+          - mailcatcher
+    nginx:
+        build: nginx
+        ports:
+            - "80:80"
+        volumes_from:
+            - php
+        volumes:
+            - ./logs/nginx/:/var/log/nginx:cached
+    mailcatcher:
+        image: tophfr/mailcatcher
+        ports:
+          - 1080:80
+    adminer:
+        image: adminer
+        ports:
+          - 8080:8080
+        depends_on:
+          - db
