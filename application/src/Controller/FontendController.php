@@ -15,4 +15,13 @@ class FontendController extends AbstractController
     {
         return $this->render('frontend/index.html.twig');
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/imprint", name="app_imprint")
+     */
+    public function imprint()
+    {
+        return $this->render('imprint.html.twig');
+    }
 }
