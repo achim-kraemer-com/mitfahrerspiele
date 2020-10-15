@@ -12,7 +12,7 @@ class UserFixture extends Fixture
     /**
      * @var UserPasswordEncoderInterface
      */
-    private UserPasswordEncoderInterface $encoder;
+    private $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
