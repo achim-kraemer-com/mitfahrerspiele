@@ -1,7 +1,7 @@
 version: '2'
 services:
     db:
-        image: mysql:5.7.22
+        image: library/mariadb:10.1.44
         ports:
             - "3306:3306"
         environment:
