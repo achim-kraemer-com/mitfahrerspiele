@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Inhalte{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Mitfahrerspiele - Inhalte</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titel</th>
+                <th>Beschreibung</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for content in contents %}
+            <tr>
+                <td><a href="{{ path('content_edit', {'id': content.id}) }}">{{ content.title }}</a></td>
+                <td>{{ content.description }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary btn-left" href="{{ path('content_new') }}">Neu</a>
+</div>
+{% endblock %}

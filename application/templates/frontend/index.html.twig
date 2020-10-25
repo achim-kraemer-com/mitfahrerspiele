@@ -1,7 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ parent() }} - für eine angenehme Reise{% endblock %}
+
 {% block body %}
-    <div class="container">
-        Hier kommt der Text rein!
+<div class="container">
+    <div class="index-container">
+        <h1>Mitfahrerspiele - für eine angenehme Reise</h1>
+        <div class="text-wrapper m-3">
+            <h2>Information</h2>
+            Eine Fahrt, z.B. in den Urlaub, kann eine lange und anstrengende Sache sein.<br>
+            Mit lustigen Spielen kann man die Fahrt für alle Mitfahrer viel angenehmer gestalten.<br>
+            Auf dieser Seite finden Sie viele Spiele und Ideen womit man sich die Zeit während einer langen Fahrt vertreiben kann.
+        </div>
+        <div class="text-wrapper ml-3 mt-4">
+            <h2>Wichtig - Sicherheit geht vor!!!</h2>
+            Die Sicherheit während der gesammten Fahrt darf durch ein Spiel nicht gefährdet werden. <br>
+            Der Fahrere muss sich die ganze Zeit auf den Verkehr konzentrieren und darf durch die hier vorgestellten Spiele nicht davon abgelenkt werden.
+        </div>
     </div>
+</div>
 {% endblock %}

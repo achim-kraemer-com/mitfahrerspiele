@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:7.2-fpm-alpine
 
 LABEL maintainer="Achim Kraemer <a.kraemer@mso-digital.de>"
 
@@ -12,6 +12,8 @@ RUN apk add --update \
     icu-dev \
     zip \
     unzip \
+    freetype-dev \
+    libjpeg-turbo-dev \
     libpng-dev
 
 RUN npm install --global yarn && yarn --version

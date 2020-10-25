@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Navigation{% endblock %}
+
+{% block body %}
+    <h1>Navigation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ navigation.title }}</td>
+            </tr>
+            <tr>
+                <th>ShortText</th>
+                <td>{{ navigation.shortText }}</td>
+            </tr>
+            <tr>
+                <th>Place</th>
+                <td>{{ navigation.place }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ navigation.id }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ navigation.createdAt ? navigation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ navigation.updatedAt ? navigation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('navigation_index') }}">Zurück zur Liste</a>
+
+    <a href="{{ path('navigation_edit', {'id': navigation.id}) }}">Bearbeiten</a>
+
+    {{ include('navigation/_delete_form.html.twig') }}
+{% endblock %}

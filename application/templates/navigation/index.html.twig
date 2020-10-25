@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Navigationen{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Mitfahrerspiele - Navigationen</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titel</th>
+                <th>Kurzbeschreibung</th>
+                <th>Position</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for navigation in navigations %}
+            <tr>
+                <td><a href="{{ path('navigation_edit', {'id': navigation.id}) }}">{{ navigation.title }}</a></td>
+                <td>{{ navigation.shortText }}</td>
+                <td>{{ navigation.position }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary btn-left" href="{{ path('navigation_new') }}">Neu</a>
+</div>
+{% endblock %}

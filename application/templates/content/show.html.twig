@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ content.title }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="index-container">
+        <h1>Mitfahrerspiele - {{ content.title }}</h1>
+        <div class="text-wrapper m-3 mb-5">
+            <h2>{{ content.title }}</h2>
+            <p>{{ content.description }}</p>
+            <a class="btn btn-primary btn-center" href="{{ path('app_contents', {'navigation': content.navigation.id }) }}">Zurück zur Liste</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

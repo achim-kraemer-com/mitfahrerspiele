@@ -1,16 +1,14 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 border">
+<nav class="navbar navbar-expand navbar-light navigation mb-5 border">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="container">
             <ul class="nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href=" {{ path('app_index') }}" aria-haspopup="false" aria-expanded="false"><img src="{{ asset('build/images/logo_01_yieldscale_landscape_rgb_kl.png') }}"></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href=" {{ path('app_index') }}" aria-haspopup="false" aria-expanded="false">Benutzer</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href=" {{ path('app_index') }}" aria-haspopup="false" aria-expanded="false">Translations</a>
-                </li>
+                {% if navigations is defined %}
+                    {% for navigation in navigations %}
+                        <li class="nav-item dropdown mr-3">
+                            <a class="btn btn-primary" href=" {{ path('app_contents', {'navigation': navigation.id}) }}" aria-haspopup="false" aria-expanded="false">{{ navigation.title }}</a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
             </ul>
         </div>
     </div>

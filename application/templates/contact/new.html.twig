@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Kontaktanfrage erstellen{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="index-container">
+        <h1>Mitfahrerspiele - Kontaktanfrage erstellen</h1>
+        <div class="text-wrapper m-3 mb-5">
+            {{ include('contact/_form.html.twig') }}
+        </div>
+    </div>
+</div>
+{% endblock %}

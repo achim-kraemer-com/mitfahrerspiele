@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\GameRepository;
+use App\Repository\ContentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=GameRepository::class)
+ * @ORM\Entity(repositoryClass=ContentRepository::class)
  */
-class Game extends IdentifiableModel
+class Content extends IdentifiableModel
 {
     /**
      * @ORM\Column(type="string", length=255)
@@ -21,7 +21,7 @@ class Game extends IdentifiableModel
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Navigation::class, inversedBy="games")
+     * @ORM\ManyToOne(targetEntity=Navigation::class, inversedBy="contents")
      * @ORM\JoinColumn(nullable=false)
      */
     private $navigation;

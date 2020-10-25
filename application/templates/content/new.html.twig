@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Neuen Inhalt erstellen{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Mitfahrerspiele - Neuen Inhalt erstellen</h1>
+
+    {{ include('content/_form.html.twig') }}
+
+    <a class="btn btn-primary btn-center" href="{{ path('content_index') }}">Zurück zur Liste</a>
+</div>
+{% endblock %}

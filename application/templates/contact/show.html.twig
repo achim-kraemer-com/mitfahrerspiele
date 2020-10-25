@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Kontaktanfrage{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Kontaktanfrage</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ contact.name }}</td>
+            </tr>
+            <tr>
+                <th>Email-Adresse</th>
+                <td>{{ contact.email }}</td>
+            </tr>
+            <tr>
+                <th>Nachricht</th>
+                <td>{{ contact.message }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary btn-left" href="{{ path('contact_index') }}">Zurück zur Liste</a>
+</div>
+{% endblock %}

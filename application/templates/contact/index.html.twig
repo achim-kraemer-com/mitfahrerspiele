@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Kontaktanfragen{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Kontaktanfragen</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email-Adresse</th>
+                <th>Nachricht</th>
+                <th>Erstellt</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+            <tr>
+                <td><a href="{{ path('contact_show', {'id': contact.id}) }}">{{ contact.name }}</a></td>
+                <td>{{ contact.email }}</td>
+                <td>{{ contact.message|raw|nl2br }}</td>
+                <td>{{ contact.createdAt|date('d.m.Y H:i:s') }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

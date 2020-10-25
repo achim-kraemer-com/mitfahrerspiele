@@ -25,17 +25,22 @@ class Navigation extends IdentifiableModel
     /**
      * @ORM\Column(type="integer")
      */
-    private $place;
+    private $position;
 
     /**
-     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="navigation")
+     * @ORM\OneToMany(targetEntity=Content::class, mappedBy="navigation")
      */
-    private $games;
+    private $contents;
 
     public function __construct()
     {
         parent::__construct();
-        $this->games = new ArrayCollection();
+        $this->contents = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 
     public function getTitle(): ?string
@@ -62,43 +67,41 @@ class Navigation extends IdentifiableModel
         return $this;
     }
 
-    public function getPlace(): ?int
+    public function getPosition()
     {
-        return $this->place;
+        return $this->position;
     }
 
-    public function setPlace(int $place): self
+    public function setPosition($position): void
     {
-        $this->place = $place;
-
-        return $this;
+        $this->position = $position;
     }
 
     /**
-     * @return Collection|Game[]
+     * @return Collection|Content[]
      */
-    public function getGames(): Collection
+    public function getContents(): Collection
     {
-        return $this->games;
+        return $this->contents;
     }
 
-    public function addGame(Game $game): self
+    public function addContents(Content $content): self
     {
-        if (!$this->games->contains($game)) {
-            $this->games[] = $game;
-            $game->setNavigation($this);
+        if (!$this->contents->contains($content)) {
+            $this->contents[] = $content;
+            $content->setNavigation($this);
         }
 
         return $this;
     }
 
-    public function removeGame(Game $game): self
+    public function removeContents(Content $content): self
     {
-        if ($this->games->contains($game)) {
-            $this->games->removeElement($game);
+        if ($this->contents->contains($content)) {
+            $this->contents->removeElement($content);
             // set the owning side to null (unless already changed)
-            if ($game->getNavigation() === $this) {
-                $game->setNavigation(null);
+            if ($content->getNavigation() === $this) {
+                $content->setNavigation(null);
             }
         }
 

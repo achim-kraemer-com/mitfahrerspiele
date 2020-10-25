@@ -6,14 +6,17 @@
         {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
     </head>
     <body class="d-flex flex-column min-vh-100">
-        {% block navigation %}
-            {% if app.user %}
-                {% include 'backend/navigation.html.twig' %}
-            {% else %}
-                {% include 'frontend/navigation.html.twig' %}
-            {% endif %}
-        {% endblock %}
-        {% block body %}{% endblock %}
+        <div class="page-wrapper">
+            {% block navigation %}
+                {% include 'top-navigation.html.twig' %}
+                {% if app.user %}
+                    {% include 'backend/navigation.html.twig' %}
+                {% else %}
+                    {% include 'frontend/navigation.html.twig' %}
+                {% endif %}
+            {% endblock %}
+            {% block body %}{% endblock %}
+        </div>
         {% block footer %}{% include 'footer.html.twig' %}{% endblock %}
         {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
     </body>

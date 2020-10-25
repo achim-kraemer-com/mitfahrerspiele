@@ -1,17 +1,20 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 border">
+<nav class="navbar navbar-expand navbar-light navigation mb-3 border">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="container">
             <ul class="nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href=" {{ path('app_index') }}" aria-haspopup="false" aria-expanded="false"><img src="{{ asset('build/images/logo_01_yieldscale_landscape_rgb_kl.png') }}"></a>
+                <li class="nav-item dropdown mr-3">
+                    <a class="btn btn-primary" href=" {{ path('navigation_index') }}" aria-haspopup="false" aria-expanded="false">Navigation</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href=" {{ path('game_index') }}" aria-haspopup="false" aria-expanded="false">Spiele</a>
+                <li class="nav-item dropdown mr-3">
+                    <a class="btn btn-primary" href=" {{ path('content_index') }}" aria-haspopup="false" aria-expanded="false">Inhalt</a>
+                </li>
+                <li class="nav-item dropdown mr-3">
+                    <a class="btn btn-primary" href=" {{ path('contact_index') }}" aria-haspopup="false" aria-expanded="false">Kontaktanfragen</a>
                 </li>
             </ul>
             <ul class="nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href=" {{ path('app_logout') }}" aria-haspopup="false" aria-expanded="false">Logout</a>
+                    <a class="btn btn-primary" href=" {{ path('app_logout') }}" aria-haspopup="false" aria-expanded="false">Logout</a>
                 </li>
             </ul>
         </div>
