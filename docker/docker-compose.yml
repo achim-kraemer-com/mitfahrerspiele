@@ -11,8 +11,8 @@ services:
             MYSQL_PASSWORD: symfony
         volumes:
           - ./data/db:/var/lib/mysql
-    php:
-        build: php-fpm/7.4
+    php72:
+        build: php-fpm/7.2
         container_name: mitfahrerspiele
         ports:
             - "9000:9000"
@@ -28,7 +28,7 @@ services:
         ports:
             - "80:80"
         volumes_from:
-            - php
+            - php72
         volumes:
             - ./logs/nginx/:/var/log/nginx:cached
     mailcatcher:

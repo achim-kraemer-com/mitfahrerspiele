@@ -33,7 +33,7 @@ RUN docker-php-ext-install intl
 RUN docker-php-ext-install gd
 
 RUN apk add --no-cache $PHPIZE_DEPS \
-	&& pecl install xdebug-2.9.6 \
+	&& pecl install xdebug-2.6.0 \
 	&& docker-php-ext-enable xdebug
 
 ADD symfony.ini /usr/local/etc/php-fpm.d/
