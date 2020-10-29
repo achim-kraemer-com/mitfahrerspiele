@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "~7.2.24",
+        "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "composer/package-versions-deprecated": "^1.11",
@@ -59,7 +59,7 @@
             "*": "dist"
         },
         "platform": {
-            "php": "7.2.24"
+            "php": "7.4"
         },
         "sort-packages": true
     },
