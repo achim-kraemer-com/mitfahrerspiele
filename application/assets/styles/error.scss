@@ -1,0 +1,21 @@
+#error_404, #error_403 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: #fff;
+}
+
+#error_403 {
+  background-image: url("../images/error_403.jpg");
+}
+
+#error_404 {
+  background-image: url("../images/error_404.jpg");
+}

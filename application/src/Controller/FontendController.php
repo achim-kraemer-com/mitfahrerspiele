@@ -60,9 +60,9 @@ class FontendController extends AbstractController
     }
 
     /**
-     * @Route("/contact/new", name="contact_new", methods={"GET","POST"})
+     * @Route("/contact", name="contact_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, NavigationRepository $navigationRepository): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
@@ -76,6 +76,7 @@ class FontendController extends AbstractController
 
         return $this->render('contact/new.html.twig', [
             'contact' => $contact,
+            'navigations' => $navigationRepository->findBy([], ['position' => 'ASC']),
             'form' => $form->createView(),
         ]);
     }

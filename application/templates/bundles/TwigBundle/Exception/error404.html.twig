@@ -1,0 +1,14 @@
+{# app/Resources/TwigBundle/views/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="error_404"></div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('error') }}
+{% endblock %}

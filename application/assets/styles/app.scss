@@ -4,8 +4,17 @@ $white: #fff;
 
 @import "~bootstrap/scss/bootstrap";
 
+@font-face {
+    font-family: 'Chalkboard';
+    src: url('/build/fonts/Chalkboard-01.ttf')
+    format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html, body {
     background-color: $white;
+    font-family: Chalkboard, sans-serif;
     font-size: 1.1rem;
     margin: 0;
 }
@@ -37,6 +46,10 @@ body {
 
 .navigation {
     background-color: $navigation-background-color;
+}
+
+.top-navigation {
+    padding: 0;
 }
 
 .index-container {
