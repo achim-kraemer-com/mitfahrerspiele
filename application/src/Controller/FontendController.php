@@ -10,6 +10,8 @@ use App\Repository\NavigationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FontendController extends AbstractController
@@ -62,7 +64,7 @@ class FontendController extends AbstractController
     /**
      * @Route("/contact", name="contact_new", methods={"GET","POST"})
      */
-    public function new(Request $request, NavigationRepository $navigationRepository): Response
+    public function new(Request $request, NavigationRepository $navigationRepository, MailerInterface $mailer): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
@@ -72,6 +74,17 @@ class FontendController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($contact);
             $entityManager->flush();
+
+            $email = (new Email())
+                ->from($contact->getEmail())
+                ->to('info@mitfahrerspiele.de')
+                ->subject('Mitfahrerspiele - Kontaktanfrage')
+                ->text($contact->getMessage());
+            $mailer->sender($email);
+            $this->addFlash('success', 'Ihr Kontaktanfrage wurde verschickt!');
+
+            $contact = new Contact();
+            $form = $this->createForm(ContactType::class, $contact);
         }
 
         return $this->render('contact/new.html.twig', [
