@@ -25,7 +25,7 @@ class ContactType extends AbstractType
             ->add('message', TextareaType::class, [
                 'label' => 'Nachricht',
             ])
-            ->add('captcha', CaptchaType::class)
+//            ->add('captcha', CaptchaType::class)
         ;
     }
 

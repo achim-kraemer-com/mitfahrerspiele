@@ -1,22 +1,20 @@
 <nav class="navbar navbar-expand navbar-light navigation mb-3 border">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="container">
-            <ul class="nav">
-                <li class="nav-item dropdown mr-3">
-                    <a class="btn btn-primary" href=" {{ path('navigation_index') }}" aria-haspopup="false" aria-expanded="false">Navigation</a>
-                </li>
-                <li class="nav-item dropdown mr-3">
-                    <a class="btn btn-primary" href=" {{ path('content_index') }}" aria-haspopup="false" aria-expanded="false">Inhalt</a>
-                </li>
-                <li class="nav-item dropdown mr-3">
-                    <a class="btn btn-primary" href=" {{ path('contact_index') }}" aria-haspopup="false" aria-expanded="false">Kontaktanfragen</a>
-                </li>
-            </ul>
-            <ul class="nav">
-                <li class="nav-item dropdown">
-                    <a class="btn btn-primary" href=" {{ path('app_logout') }}" aria-haspopup="false" aria-expanded="false">Logout</a>
-                </li>
-            </ul>
-        </div>
+    <div class="container">
+        <ul class="nav">
+            <li class="nav-item dropdown mr-3">
+                <a class="btn btn-primary" href=" {{ path('navigation_index') }}" aria-haspopup="false" aria-expanded="false">Navigation</a>
+            </li>
+            <li class="nav-item dropdown mr-3">
+                <a class="btn btn-primary" href=" {{ path('content_index') }}" aria-haspopup="false" aria-expanded="false">Inhalt</a>
+            </li>
+            <li class="nav-item dropdown mr-3">
+                <a class="btn btn-primary" href=" {{ path('contact_index') }}" aria-haspopup="false" aria-expanded="false">Kontaktanfragen</a>
+            </li>
+        </ul>
+        <ul class="nav">
+            <li class="nav-item dropdown">
+                <a class="btn btn-primary" href=" {{ path('app_logout') }}" aria-haspopup="false" aria-expanded="false">Logout</a>
+            </li>
+        </ul>
     </div>
 </nav>

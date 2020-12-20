@@ -24,8 +24,12 @@ body {
     min-height: calc(100vh - 100px);
 }
 
-.container {
+.page-wrapper .container {
     position: relative;
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        max-width: 96%;
+    }
 }
 
 .page-wrapper {
@@ -44,8 +48,22 @@ body {
     height: 60px;
 }
 
-.navigation {
+.navbar.navbar-expand {
     background-color: $navigation-background-color;
+}
+
+.navigation-container {
+    background-color: $navigation-background-color;
+
+    @media (min-width: 368px) and (max-width: 1024px) {
+        background-color: $white;
+    }
+}
+
+#navbarToggleExternalContent {
+    @media (min-width: 368px) and (max-width: 1024px) {
+        background-color: $navigation-background-color;
+    }
 }
 
 .top-navigation {
@@ -81,4 +99,18 @@ body {
 .btn-left {
     position: absolute;
     left: 15px;
+}
+
+.positive-content, .negative-content {
+    cursor: pointer;
+}
+
+#image-container {
+    width: 100%;
+}
+
+#floated {
+    margin-right: 20px;
+    float: left;
+    width: 300px;
 }

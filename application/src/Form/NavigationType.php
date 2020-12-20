@@ -16,9 +16,6 @@ class NavigationType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titel',
             ])
-            ->add('shortText', TextType::class, [
-                'label' => 'Kurzbeschreibung',
-            ])
             ->add('position', TextType::class, [
                 'label' => 'Position',
             ])

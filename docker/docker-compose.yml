@@ -10,34 +10,52 @@ services:
             MYSQL_USER: symfony
             MYSQL_PASSWORD: symfony
         volumes:
-          - ./data/db:/var/lib/mysql
-    php:
-        build: php-fpm/7.4
+            - ./data/db:/var/lib/mysql
+
+    apache:
+        build:
+            context: ./build/
+            dockerfile: Dockerfile_apache
         container_name: mitfahrerspiele
-        ports:
-            - "9000:9000"
-            - "9999:9999"
-        volumes:
-            - ../application:/var/www/symfony:cached
-            - ./logs/symfony:/var/www/symfony/var/logs:cached
-        depends_on:
-          - db
-          - mailcatcher
-    nginx:
-        build: nginx
+        restart: 'always'
         ports:
             - "80:80"
-        volumes_from:
-            - php
         volumes:
-            - ./logs/nginx/:/var/log/nginx:cached
+            - ../application:/app:cached
+        working_dir: '/app/'
+        environment:
+            # https://dockerfile.readthedocs.io/en/latest/content/DockerImages/dockerfiles/php-apache.html#php-ini-variables
+            - "php.memory_limit=1G"
+            - "PHP_DATE_TIMEZONE=Europe/Berlin"
+            - "WEB_DOCUMENT_ROOT=/app/public"
+
+    apache-xdebug:
+        build:
+            context: ./build/
+            dockerfile: Dockerfile_apache_xdebug
+        container_name: mitfahrerspiele-dev
+        restart: 'always'
+        ports:
+            - "8081:80"
+        volumes:
+            - ../application:/app:cached
+        working_dir: '/app/'
+        env_file:
+            - .env.xdebug
+        environment:
+            # https://dockerfile.readthedocs.io/en/latest/content/DockerImages/dockerfiles/php-apache.html#php-ini-variables
+            - "php.memory_limit=1G"
+            - "PHP_DATE_TIMEZONE=Europe/Berlin"
+            - "WEB_DOCUMENT_ROOT=/app/public"
+
     mailcatcher:
         image: tophfr/mailcatcher
         ports:
-          - 1080:80
+            - 1080:80
+
     adminer:
         image: adminer
         ports:
-          - 8080:8080
+            - 8080:8080
         depends_on:
-          - db
+            - db

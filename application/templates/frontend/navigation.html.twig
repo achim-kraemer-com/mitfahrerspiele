@@ -1,15 +1,26 @@
-<nav class="navbar navbar-expand navbar-light navigation mb-5 border">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="container">
-            <ul class="nav">
-                {% if navigations is defined %}
-                    {% for navigation in navigations %}
-                        <li class="nav-item dropdown mr-3">
-                            <a class="btn btn-primary" href=" {{ path('app_contents', {'navigation': navigation.id}) }}" aria-haspopup="false" aria-expanded="false">{{ navigation.title }}</a>
-                        </li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
+<div class="navigation-container mb-5 p-lg-2">
+    <div class="container">
+        <div class="navbar-expand-lg">
+            <nav class="navbar navbar-light d-lg-none d-flex flex-nowrap">
+                <a class="navbar-brand" href=" {{ path('app_index') }}" aria-haspopup="true" aria-expanded="false">
+                    <img width="12%" src="{{ asset('build/images/Mitfahrerspiele_Logo_150dpi.png') }}" alt="mitfahrerspiele.de">
+                    <img width="50%" class="align-bottom" src="{{ asset('build/images/Mitfahrerspiele_Schriftzug_300dpi.png') }}" alt="mitfahrerspiele.de">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+            <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+                <ul class="nav navbar-nav">
+                    {% if navigations is defined %}
+                        {% for navigation in navigations %}
+                            <li class="nav-item dropdown mr-3">
+                                <a class="btn btn-primary" href=" {{ path('app_contents', {'navigationShortText': navigation.shortText}) }}" aria-haspopup="false" aria-expanded="false">{{ navigation.title }}</a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </div>
-</nav>
+</div>

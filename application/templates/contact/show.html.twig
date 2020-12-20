@@ -18,7 +18,7 @@
             </tr>
             <tr>
                 <th>Nachricht</th>
-                <td>{{ contact.message }}</td>
+                <td>{{ contact.message|raw|nl2br }}</td>
             </tr>
         </tbody>
     </table>

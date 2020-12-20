@@ -35,6 +35,11 @@ class NavigationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $search = array('Ä', 'Ö', 'Ü', 'ä', 'ö', 'ü', 'ß', ' ');
+            $replace = array('Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss', '_');
+            $shortText = str_replace($search, $replace, $navigation->getTitle());
+            $shortText = strtolower($shortText);
+            $navigation->setShortText($shortText);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($navigation);
             $entityManager->flush();
@@ -67,7 +72,14 @@ class NavigationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $search = array('Ä', 'Ö', 'Ü', 'ä', 'ö', 'ü', 'ß', ' ');
+            $replace = array('Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss', '_');
+            $shortText = str_replace($search, $replace, $navigation->getTitle());
+            $shortText = strtolower($shortText);
+            $navigation->setShortText($shortText);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($navigation);
+            $entityManager->flush();
 
             return $this->redirectToRoute('navigation_index');
         }

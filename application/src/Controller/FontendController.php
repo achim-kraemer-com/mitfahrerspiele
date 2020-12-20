@@ -5,9 +5,13 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Entity\Content;
 use App\Entity\Navigation;
+use App\Entity\Vote;
 use App\Form\ContactType;
+use App\Repository\ContentRepository;
 use App\Repository\NavigationRepository;
+use App\Repository\VoteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -39,10 +43,11 @@ class FontendController extends AbstractController
     }
 
     /**
-     * @Route("/contents/{navigation}", name="app_contents")
+     * @Route("/contents/{navigationShortText}", name="app_contents")
      */
-    public function contents(Navigation $navigation, NavigationRepository $navigationRepository): Response
+    public function contents(NavigationRepository $navigationRepository, string $navigationShortText): Response
     {
+        $navigation = $navigationRepository->findOneBy(['shortText' => $navigationShortText]);
         $contents = $navigation->getContents();
         return $this->render('frontend/contents.html.twig', [
             'navigations' => $navigationRepository->findBy([], ['position' => 'ASC']),
@@ -52,12 +57,25 @@ class FontendController extends AbstractController
     }
 
     /**
-     * @Route("content/{id}", name="content_show", methods={"GET"})
+     * @Route("content/{contentShortText}", name="content_show", methods={"GET"})
      */
-    public function show(Content $content): Response
-    {
+    public function show(
+        string $contentShortText,
+        ContentRepository $contentRepository,
+        NavigationRepository $navigationRepository,
+        VoteRepository $voteRepository
+    ): Response {
+        $content = $contentRepository->findOneBy(['shortText' => $contentShortText]);
+        $canVote = true;
+        $ipAddress = $this->getUserIpAddr();
+        $vote = $voteRepository->findOneBy(['content' => $content, 'ipAdress' => $ipAddress]);
+        if (is_object($vote)) {
+            $canVote = false;
+        }
         return $this->render('content/show.html.twig', [
             'content' => $content,
+            'canVote' => $canVote,
+            'navigations' => $navigationRepository->findBy([], ['position' => 'ASC']),
         ]);
     }
 
@@ -75,13 +93,7 @@ class FontendController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            $email = (new Email())
-                ->from($contact->getEmail())
-                ->to('info@mitfahrerspiele.de')
-                ->subject('Mitfahrerspiele - Kontaktanfrage')
-                ->text($contact->getMessage());
-            $mailer->sender($email);
-            $this->addFlash('success', 'Ihr Kontaktanfrage wurde verschickt!');
+            $this->addFlash('success', 'Ihr Kontaktanfrage wurde erfolgreich verschickt!');
 
             $contact = new Contact();
             $form = $this->createForm(ContactType::class, $contact);
@@ -92,5 +104,63 @@ class FontendController extends AbstractController
             'navigations' => $navigationRepository->findBy([], ['position' => 'ASC']),
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/content/positive_update", name="content_positive_update")
+     */
+    public function updatePositive(Request $request, ContentRepository $contentRepository): JsonResponse
+    {
+        $contentId = $request->request->get('content');
+        $content = $contentRepository->findOneBy(['id' => $contentId]);
+        $positive = $content->getPositive();
+        $positive++;
+        $content->setPositive($positive);
+        $vote = new Vote();
+        $vote->setContent($content);
+        $vote->setIpAdress($this->getUserIpAddr());
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($vote);
+        $entityManager->persist($content);
+        $entityManager->flush();
+
+        return new JsonResponse($positive);
+    }
+
+    /**
+     * @Route("/content/negative_update", name="content_negative_update")
+     */
+    public function updateNegative(Request $request, ContentRepository $contentRepository): JsonResponse
+    {
+        $contentId = $request->request->get('content');
+        $content = $contentRepository->findOneBy(['id' => $contentId]);
+        $negative = $content->getNegative();
+        $negative++;
+        $content->setNegative($negative);
+        $vote = new Vote();
+        $vote->setContent($content);
+        $vote->setIpAdress($this->getUserIpAddr());
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($vote);
+        $entityManager->persist($content);
+        $entityManager->flush();
+
+        return new JsonResponse($negative);
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getUserIpAddr(){
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])){
+            //ip from share internet
+            return $_SERVER['HTTP_CLIENT_IP'];
+        }
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+            //ip pass from proxy
+            return $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+
+        return $_SERVER['REMOTE_ADDR'];
     }
 }

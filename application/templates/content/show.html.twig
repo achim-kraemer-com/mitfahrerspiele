@@ -8,8 +8,17 @@
         <h1>Mitfahrerspiele - {{ content.title }}</h1>
         <div class="text-wrapper m-3 mb-5">
             <h2>{{ content.title }}</h2>
-            <p>{{ content.description }}</p>
-            <a class="btn btn-primary btn-center" href="{{ path('app_contents', {'navigation': content.navigation.id }) }}">Zurück zur Liste</a>
+            <div id="image-container">
+                {% if content.imageFilename is not null %}
+                    <div id="floated">
+                        <img width="300px" src="{{ asset('uploads/images/' ~ content.imageFilename) }}">
+                    </div>
+                {% endif %}
+                {{ content.description }}
+            </div>
+            <span {% if canVote %}class="positive-content mr-4"{% else %}class="mr-4"{% endif %} data-url="{{ path('content_positive_update') }}" data-id="{{ content.id }}"> <span id="positive-content-value">{{ content.positive }}</span> <i size="20%" class="far fa-thumbs-up"></i> </span>
+            <span {% if canVote %}class="negative-content"{% endif %} data-url="{{ path('content_negative_update') }}"> <span id="negative-content-value">{{ content.negative }}</span> <i size="20%" class="far fa-thumbs-down"></i></span>
+            <a class="btn btn-primary btn-center mt-5 mt-lg-2" href="{{ path('app_contents', {'navigationShortText': content.navigation.shortText }) }}">Zurück zur Liste</a>
         </div>
     </div>
 </div>

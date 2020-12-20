@@ -18,7 +18,7 @@ class Navigation extends IdentifiableModel
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=255)
      */
     private $shortText;
 
@@ -40,7 +40,7 @@ class Navigation extends IdentifiableModel
 
     public function __toString()
     {
-        return $this->getTitle();
+        return $this->getTitle() ?? '';
     }
 
     public function getTitle(): ?string
