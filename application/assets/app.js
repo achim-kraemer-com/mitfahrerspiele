@@ -66,3 +66,23 @@ function stopVoting()
     $('.positive-content').off('click').removeClass('positive-content');
     $('.negative-content').off('click').removeClass('negative-content');
 }
+
+$('#license-plate').keyup(function () {
+    const url = '/content/license_plate';
+    const licensePlate = $(this).val();
+    const data = {'licensePlate': licensePlate};
+    $.ajax({
+        type: "POST",
+        cache: false,
+        url: url,
+        data: data,
+        statusCode: {
+            404: function () {
+                alert("Bitte versuchen Sie nicht das System zu manipulieren");
+            }
+        },
+        success: function (data) {
+            $('#license-plate-result').text(data);
+        },
+    });
+});

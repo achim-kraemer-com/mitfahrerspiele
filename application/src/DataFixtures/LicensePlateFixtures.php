@@ -338,7 +338,7 @@ class LicensePlateFixtures extends Fixture
             "KI" => "Kiel (SlHo)",
             "KIB" => "Donnersberg-Kreis in Kirchheimbolanden (RhPf)",
             "KK" => "Viersen (NrWe)",
-            "KL => Kaiserslautern, Stadt und Land (RhPf)",
+            "KL" => "Kaiserslautern, Stadt und Land (RhPf)",
             "KLE" => "Kleve (NrWe)",
             "KLZ" => "Altmarkkreis-Salzwedel (SaAn)",
             "KM" => "Landkreis Bautzen (Sachs)",
