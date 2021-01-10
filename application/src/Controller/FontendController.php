@@ -8,6 +8,7 @@ use App\Entity\Navigation;
 use App\Entity\Vote;
 use App\Form\ContactType;
 use App\Repository\ContentRepository;
+use App\Repository\LicensePlateRepository;
 use App\Repository\NavigationRepository;
 use App\Repository\VoteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -151,16 +152,29 @@ class FontendController extends AbstractController
     /**
      * @return mixed
      */
-    private function getUserIpAddr(){
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])){
+    private function getUserIpAddr() {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             //ip from share internet
             return $_SERVER['HTTP_CLIENT_IP'];
         }
-        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             //ip pass from proxy
             return $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
 
         return $_SERVER['REMOTE_ADDR'];
+    }
+
+    /**
+     * @Route("/content/license_plate", name="content_license_plate")
+     */
+    public function getLicensePlate(Request $request, LicensePlateRepository $licensePlateRepository): JsonResponse
+    {
+        $licensePlateString = $request->request->get('licensePlate');
+        $licensePlate = $licensePlateRepository->findOneBy(['shortText' => $licensePlateString]);
+        if (null === $licensePlate || !is_object($licensePlate)) {
+            return new JsonResponse('Zu diesem Kennzeichen gibt es kein Ergebnis');
+        }
+        return new JsonResponse($licensePlate->getText());
     }
 }
