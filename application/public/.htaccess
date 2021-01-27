@@ -20,6 +20,9 @@ DirectoryIndex index.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # ads.txt file from yieldscale cdn server
+    RewriteRule ^ads\.txt$ "https\:\/\/cdns\.yieldscale.com\/ads\.txt" [R=301,L]
+
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the
     # project in a subdirectory, the base path will be prepended to allow proper
