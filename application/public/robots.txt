@@ -1,2 +1,18 @@
-User-agent: *
-Allow: /
+# Google Image
+User-agent: Googlebot-Image
+Disallow:
+Allow: /*
+
+# Google AdSense
+User-agent: Mediapartners-Google*
+Disallow:
+Allow: /*
+
+# SEMRush
+User-agent: SemrushBot
+Disallow:
+Allow: /*
+
+User-agent: SemrushBot-SA
+Disallow:
+Allow: /*
