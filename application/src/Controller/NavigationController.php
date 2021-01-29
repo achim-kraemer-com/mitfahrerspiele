@@ -36,7 +36,7 @@ class NavigationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $search = array('Ä', 'Ö', 'Ü', 'ä', 'ö', 'ü', 'ß', ' ');
-            $replace = array('Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss', '_');
+            $replace = array('Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss', '-');
             $shortText = str_replace($search, $replace, $navigation->getTitle());
             $shortText = strtolower($shortText);
             $navigation->setShortText($shortText);
@@ -73,7 +73,7 @@ class NavigationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $search = array('Ä', 'Ö', 'Ü', 'ä', 'ö', 'ü', 'ß', ' ');
-            $replace = array('Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss', '_');
+            $replace = array('Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss', '-');
             $shortText = str_replace($search, $replace, $navigation->getTitle());
             $shortText = strtolower($shortText);
             $navigation->setShortText($shortText);

@@ -61,7 +61,7 @@ class ContentController extends AbstractController
             }
             $entityManager = $this->getDoctrine()->getManager();
             $search = array('Ä', 'Ö', 'Ü', 'ä', 'ö', 'ü', 'ß', ' ');
-            $replace = array('Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss', '_');
+            $replace = array('Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss', '-');
             $shortText = str_replace($search, $replace, $content->getTitle());
             $shortText = strtolower($shortText);
             $content->setShortText($shortText);
@@ -107,7 +107,7 @@ class ContentController extends AbstractController
                 $content->setImageFilename($newFilename);
             }
             $search = array('Ä', 'Ö', 'Ü', 'ä', 'ö', 'ü', 'ß', ' ');
-            $replace = array('Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss', '_');
+            $replace = array('Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss', '-');
             $shortText = str_replace($search, $replace, $content->getTitle());
             $shortText = strtolower($shortText);
             $content->setShortText($shortText);

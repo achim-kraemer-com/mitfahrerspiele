@@ -44,7 +44,7 @@ class FontendController extends AbstractController
     }
 
     /**
-     * @Route("/contents/{navigationShortText}", name="app_contents")
+     * @Route("/liste-{navigationShortText}", name="app_contents")
      */
     public function contents(NavigationRepository $navigationRepository, string $navigationShortText): Response
     {
@@ -58,7 +58,7 @@ class FontendController extends AbstractController
     }
 
     /**
-     * @Route("content/{contentShortText}", name="content_show", methods={"GET"})
+     * @Route("/{contentShortText}", name="content_show", methods={"GET"})
      */
     public function show(
         string $contentShortText,
@@ -105,6 +105,19 @@ class FontendController extends AbstractController
             'navigations' => $navigationRepository->findBy([], ['position' => 'ASC']),
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/content/license_plate", name="content_license_plate")
+     */
+    public function getLicensePlate(Request $request, LicensePlateRepository $licensePlateRepository): JsonResponse
+    {
+        $licensePlateString = $request->request->get('licensePlate');
+        $licensePlate = $licensePlateRepository->findOneBy(['shortText' => $licensePlateString]);
+        if (null === $licensePlate || !is_object($licensePlate)) {
+            return new JsonResponse('Zu diesem Kennzeichen gibt es kein Ergebnis');
+        }
+        return new JsonResponse($licensePlate->getText());
     }
 
     /**
@@ -163,18 +176,5 @@ class FontendController extends AbstractController
         }
 
         return $_SERVER['REMOTE_ADDR'];
-    }
-
-    /**
-     * @Route("/content/license_plate", name="content_license_plate")
-     */
-    public function getLicensePlate(Request $request, LicensePlateRepository $licensePlateRepository): JsonResponse
-    {
-        $licensePlateString = $request->request->get('licensePlate');
-        $licensePlate = $licensePlateRepository->findOneBy(['shortText' => $licensePlateString]);
-        if (null === $licensePlate || !is_object($licensePlate)) {
-            return new JsonResponse('Zu diesem Kennzeichen gibt es kein Ergebnis');
-        }
-        return new JsonResponse($licensePlate->getText());
     }
 }
