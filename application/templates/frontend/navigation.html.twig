@@ -15,7 +15,7 @@
                     {% if navigations is defined %}
                         {% for navigation in navigations %}
                             <li class="nav-item dropdown mr-3">
-                                <a class="btn btn-primary" href=" {{ path('app_contents', {'navigationShortText': navigation.shortText}) }}" aria-haspopup="false" aria-expanded="false">{{ navigation.title }}</a>
+                                <a class="btn btn-primary" href=" {{ path('app_contents', {'navigationShortText': navigation.shortText}) }}" title="{{ navigation.title }}" aria-haspopup="false" aria-expanded="false">{{ navigation.title }}</a>
                             </li>
                         {% endfor %}
                     {% endif %}
