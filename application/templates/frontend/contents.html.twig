@@ -5,7 +5,7 @@
 {% block body %}
 <div class="container">
     <div class="index-container">
-        <h1>Mitfahrerspiele - {{ navigation.title }}</h1>
+        <h1>Auto Spiele - {{ navigation.title }}</h1>
         <div class="text-wrapper m-3">
             {% for content in contents %}
                 <h2><a href="{{ path('content_show', { 'contentShortText': content.shortText } ) }}" title="{{ content.title }}">{{ content.title }}</a></h2>
